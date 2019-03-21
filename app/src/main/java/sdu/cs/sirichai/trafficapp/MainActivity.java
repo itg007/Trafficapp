@@ -1,7 +1,11 @@
 package sdu.cs.sirichai.trafficapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.traffic_12, R.drawable.traffic_13, R.drawable.traffic_14, R.drawable.traffic_15,
             R.drawable.traffic_16, R.drawable.traffic_17, R.drawable.traffic_18, R.drawable.traffic_19,
             R.drawable.traffic_20};
-    String[] titleStrings, detailStrings;
+    String[] titleStrings, detailStrings, subStrings;
 
 
     @Override
@@ -29,9 +33,37 @@ public class MainActivity extends AppCompatActivity {
         titleStrings = getResources().getStringArray(R.array.title);
         detailStrings = getResources().getStringArray(R.array.detail);
 
+        //subStrings Detail ตัดข้อความ detail ให้สั้นลง
+        subStrings = new String[detailStrings.length];
+        for (int i=0; i<detailStrings.length;i++){
+            subStrings[i]=detailStrings[i].substring(0, 10) + "...";
+        }//end for
+
         //Create ListView
-        MyAdapter myAdapter = new MyAdapter(MainActivity.this, ints, titleStrings, detailStrings);
+        MyAdapter myAdapter = new MyAdapter(MainActivity.this, ints, titleStrings, subStrings);
         listView.setAdapter(myAdapter);
 
+        //ทำการเชื่องโยงแต่ละรายการใน listView ให้ลิงก์ไปหน้า Detail
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+
+                //ส่งข้อมูลไปหน้า Detail
+                Intent detaiIntent = new Intent(MainActivity.this, Detail.class);
+                //ส่งข้อมูล
+                detaiIntent.putExtra("Title", titleStrings[i]);
+                detaiIntent.putExtra("Detail", detailStrings[i]);
+                detaiIntent.putExtra("Logo", ints[i]);
+                //เริ่มส่งข้อมูล
+                startActivity(detaiIntent);
+            }
+        });//end OnItemClickListener
+
     }//end onCreate
+
+    public void clickMoreinfo(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://www.dlt.go.th/th/"));
+        startActivity(intent);
+    }//end clickMoreinfo
 }//end Class
