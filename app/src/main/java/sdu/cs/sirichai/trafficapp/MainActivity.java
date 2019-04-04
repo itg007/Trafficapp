@@ -66,4 +66,9 @@ public class MainActivity extends AppCompatActivity {
         intent.setData(Uri.parse("https://www.dlt.go.th/th/"));
         startActivity(intent);
     }//end clickMoreinfo
+
+    public void clickAboutApp(View view) {
+        Intent aboutAppIntent = new Intent(MainActivity.this, AboutApp.class);
+        startActivity(aboutAppIntent);
+    }//end clickAboutApp
 }//end Class
