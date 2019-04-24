@@ -40,7 +40,7 @@ public class AboutApp extends AppCompatActivity {
     }//end clickMobile
 
     public void clickMap(View view) {
-        Uri location = Uri.parse("https://www.google.co.th/maps/place/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B8%AA%E0%B8%A7%E0%B8%99%E0%B8%94%E0%B8%B8%E0%B8%AA%E0%B8%B4%E0%B8%95/@13.7747537,100.5096181,17.54z/data=!4m5!3m4!1s0x0:0x5feff31367bdbe1d!8m2!3d13.7760039!4d100.5106276?hl=th");
+        Uri location = Uri.parse("http://maps.google.com/maps?z=10&q=loc:13.776109, 100.509849");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
         //mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
